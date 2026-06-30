@@ -1,25 +1,22 @@
-
-export default function cartReducer(state, action) {
+function CartReducer(state, action) {
   switch (action.type) {
-    case "ADD_ITEM":
+    case "ADD":
       return {
         ...state,
         cart: [...state.cart, action.payload],
       };
 
-    case "REMOVE_ITEM":
+    case "DELETE":
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
-      };
-
-    case "CLEAR_CART":
-      return {
-        ...state,
-        cart: [],
+        cart: state.cart.filter(
+          (item) => item.id !== action.payload
+        ),
       };
 
     default:
       return state;
   }
 }
+
+export default CartReducer;

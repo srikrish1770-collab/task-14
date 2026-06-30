@@ -1,72 +1,54 @@
-import { useState } from "react";
+import { useRef } from "react";
 
 function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const nameRef = useRef();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleFocus = () => {
+    nameRef.current.focus();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (
-      form.name === "" ||
-      form.email === "" ||
-      form.message === ""
-    ) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    alert("Message Sent Successfully");
-
-    setForm({
-      name: "",
-      email: "",
-      message: "",
-    });
+    alert("Message sent successfully!");
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="container">
       <h1>Contact Us</h1>
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
+          placeholder="Enter your name"
+          ref={nameRef}
         />
-
-        <br /><br />
 
         <input
           type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          placeholder="Enter your email"
         />
 
-        <br /><br />
-
         <textarea
-          name="message"
-          placeholder="Message"
-          value={form.message}
-          onChange={handleChange}
+          placeholder="Enter your message"
+          rows="5"
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginTop: "10px",
+            marginBottom: "10px",
+          }}
         ></textarea>
 
-        <br /><br />
+        <button type="button" onClick={handleFocus}>
+          Focus Name
+        </button>
 
-        <button type="submit">Send</button>
+        <button
+          type="submit"
+          style={{ marginLeft: "10px" }}
+        >
+          Send Message
+        </button>
       </form>
     </div>
   );
